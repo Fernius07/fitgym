@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}FitGym &amp; Workout{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1>FitGym &amp; Workout</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Portada</a></li>
+                <li><a href="{% url 'ejercicios' %}">Ejercicios</a></li>
+                <li><a href="{% url 'grupos' %}">Grupos musculares</a></li>
+                <li><a href="{% url 'equipamientos' %}">Equipamiento</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+    <footer>
+        <p>FitGym &amp; Workout - Ingeniería Web</p>
+    </footer>
+</body>
+</html>
