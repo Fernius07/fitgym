@@ -24,6 +24,17 @@ Proyecto del grupo IW-BI-09 para la asignatura de Ingeniería Web. Es una págin
 
 También hay tests automáticos (`py manage.py test`) que comprueban las páginas en los dos idiomas, la traducción, el envío de valoraciones (con y sin AJAX) y los datos iniciales.
 
+## Entrega E4b: AgendaVue
+
+La segunda parte de la entrega es una SPA hecha con Vue: una agenda de contactos. Es un proyecto aparte de este y va en la carpeta `E4b` del zip de entrega.
+
+- **Desplegada en Netlify:** https://agendavue-iw-bi-09.netlify.app/
+- **Funcionalidades:** mostrar contactos (nombre, email y teléfono), crear un contacto nuevo con validación y borrar contactos. Los contactos se guardan en el navegador.
+- **Opción 1 (datos estructurados y sociales):** Microdata (`schema.org/Person` en cada contacto), RDFa Lite en la sección "Acerca de...", JSON-LD (uno fijo y otro que Vue actualiza con los contactos) y botones para compartir en X y Facebook.
+- **Validación W3C:** pasa el [validador HTML](https://validator.w3.org/nu/?doc=https%3A%2F%2Fagendavue-iw-bi-09.netlify.app%2F) y el [validador CSS](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fagendavue-iw-bi-09.netlify.app%2F&profile=css3svg) sin errores.
+
+Los detalles están en el `README.md` de la carpeta `E4b`.
+
 ## Pasos para probar el proyecto
 
 1. Abrir un cmd y activar el entorno virtual: `workon [nombre entorno virtual]`. Si no sabéis el nombre, escribid `workon` y os sale la lista.
