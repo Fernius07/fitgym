@@ -1,0 +1,183 @@
+# Traducción al inglés de FitGym & Workout (E4a, opción 6).
+# Para regenerar: py manage.py makemessages -l en
+# Para compilar:  py manage.py compilemessages
+msgid ""
+msgstr ""
+"Project-Id-Version: FitGym & Workout\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: appFitGym/forms.py
+msgid "Tu nombre"
+msgstr "Your name"
+
+#: appFitGym/forms.py
+msgid "Puntuación"
+msgstr "Rating"
+
+#: appFitGym/forms.py
+msgid "Comentario"
+msgstr "Comment"
+
+#: appFitGym/views.py
+msgid "¡Gracias por tu valoración!"
+msgstr "Thanks for your review!"
+
+#: appFitGym/templates/base.html
+msgid "Portada"
+msgstr "Home"
+
+#: appFitGym/templates/base.html
+msgid "Ejercicios"
+msgstr "Exercises"
+
+#: appFitGym/templates/base.html
+msgid "Grupos musculares"
+msgstr "Muscle groups"
+
+#: appFitGym/templates/base.html
+msgid "Equipamiento"
+msgstr "Equipment"
+
+#: appFitGym/templates/base.html
+msgid "Idioma"
+msgstr "Language"
+
+#: appFitGym/templates/base.html
+msgid "Cambiar"
+msgstr "Change"
+
+#: appFitGym/templates/base.html
+msgid "Ingeniería Web"
+msgstr "Web Engineering"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Grupo muscular"
+msgstr "Muscle group"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Equipamiento necesario"
+msgstr "Required equipment"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "No necesita equipamiento."
+msgstr "No equipment needed."
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Valoraciones"
+msgstr "Reviews"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Todavía no hay valoraciones. ¡Sé el primero!"
+msgstr "No reviews yet. Be the first!"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Deja tu valoración"
+msgstr "Leave your review"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "No se ha podido enviar la valoración. Revisa los campos."
+msgstr "The review could not be sent. Please check the fields."
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Enviar valoración"
+msgstr "Send review"
+
+#: appFitGym/templates/detalle_ejercicio.html
+msgid "Volver a la lista de ejercicios"
+msgstr "Back to the exercise list"
+
+#: appFitGym/templates/detalle_equipamiento.html
+msgid "Ejercicios que lo utilizan"
+msgstr "Exercises that use it"
+
+#: appFitGym/templates/detalle_equipamiento.html
+#: appFitGym/templates/detalle_grupo.html
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Ver detalles"
+msgstr "View details"
+
+#: appFitGym/templates/detalle_equipamiento.html
+#: appFitGym/templates/detalle_grupo.html
+msgid "No hay ejercicios asociados."
+msgstr "There are no related exercises."
+
+#: appFitGym/templates/detalle_equipamiento.html
+msgid "Volver al equipamiento"
+msgstr "Back to equipment"
+
+#: appFitGym/templates/detalle_grupo.html
+msgid "Ejercicios de este grupo"
+msgstr "Exercises in this group"
+
+#: appFitGym/templates/detalle_grupo.html
+msgid "Volver a los grupos musculares"
+msgstr "Back to muscle groups"
+
+#: appFitGym/templates/index.html
+msgid "Entrena con cabeza"
+msgstr "Train smart"
+
+#: appFitGym/templates/index.html
+msgid ""
+"Consulta ejercicios de fuerza y acondicionamiento, clasificados por grupo "
+"muscular y por el material que necesitas."
+msgstr ""
+"Browse strength and conditioning exercises, sorted by muscle group and by "
+"the equipment you need."
+
+#: appFitGym/templates/index.html
+msgid "Ver ejercicios"
+msgstr "View exercises"
+
+#: appFitGym/templates/index.html
+msgid "Ver grupos musculares"
+msgstr "View muscle groups"
+
+#: appFitGym/templates/index.html
+msgid "Ejercicios destacados"
+msgstr "Featured exercises"
+
+#: appFitGym/templates/index.html
+msgid "Ver ejercicio"
+msgstr "View exercise"
+
+#: appFitGym/templates/index.html
+#: appFitGym/templates/lista_ejercicios.html
+msgid "No hay ejercicios creados."
+msgstr "There are no exercises yet."
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Lista de ejercicios"
+msgstr "Exercise list"
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Buscar ejercicio"
+msgstr "Search exercise"
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Escribe un nombre..."
+msgstr "Type a name..."
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Todos"
+msgstr "All"
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Mostrando {n} de {total} ejercicios"
+msgstr "Showing {n} of {total} exercises"
+
+#: appFitGym/templates/lista_ejercicios.html
+msgid "Ningún ejercicio coincide con la búsqueda."
+msgstr "No exercise matches your search."
+
+#: appFitGym/templates/lista_equipamientos.html
+msgid "No hay equipamiento creado."
+msgstr "There is no equipment yet."
+
+#: appFitGym/templates/lista_grupos.html
+msgid "No hay grupos musculares creados."
+msgstr "There are no muscle groups yet."
