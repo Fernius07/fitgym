@@ -5,10 +5,15 @@
 {% block contenido %}
 <h2>{{ ejercicio.nombre }}</h2>
 <p>{{ ejercicio.descripcion }}</p>
-<p>Grupo muscular: <a href="{% url 'grupo' ejercicio.grupo.id %}">{{ ejercicio.grupo.nombre }}</a></p>
+
+<h3>Grupo muscular</h3>
+<ul class="etiquetas">
+    <li><a href="{% url 'grupo' ejercicio.grupo.id %}">{{ ejercicio.grupo.nombre }}</a></li>
+</ul>
+
 <h3>Equipamiento necesario</h3>
 {% if equipamientos %}
-    <ul>
+    <ul class="etiquetas">
     {% for eq in equipamientos %}
         <li><a href="{% url 'equipamiento' eq.id %}">{{ eq.nombre }}</a></li>
     {% endfor %}
@@ -16,5 +21,6 @@
 {% else %}
     <p>No necesita equipamiento.</p>
 {% endif %}
-<p><a href="{% url 'ejercicios' %}">Volver a la lista de ejercicios</a></p>
+
+<p><a class="boton boton-claro" href="{% url 'ejercicios' %}">Volver a la lista de ejercicios</a></p>
 {% endblock %}

@@ -3,14 +3,22 @@
 {% block titulo %}Portada - FitGym &amp; Workout{% endblock %}
 
 {% block contenido %}
+<section class="presentacion">
+    <h2>Entrena con cabeza</h2>
+    <p>Consulta ejercicios de fuerza y acondicionamiento, clasificados por grupo muscular y por el material que necesitas.</p>
+    <a class="boton" href="{% url 'ejercicios' %}">Ver ejercicios</a>
+    <a class="boton boton-claro" href="{% url 'grupos' %}">Ver grupos musculares</a>
+</section>
+
 <h2>Ejercicios destacados</h2>
-<p>Un ejercicio popular de cada grupo muscular.</p>
 {% if destacados %}
     <ul class="tarjetas">
     {% for e in destacados %}
         <li>
-            <h3><a href="{% url 'ejercicio' e.id %}">{{ e.nombre }}</a></h3>
-            <p>Grupo muscular: <a href="{% url 'grupo' e.grupo.id %}">{{ e.grupo.nombre }}</a></p>
+            <a class="etiqueta" href="{% url 'grupo' e.grupo.id %}">{{ e.grupo.nombre }}</a>
+            <h3>{{ e.nombre }}</h3>
+            <p>{{ e.descripcion|truncatewords:12 }}</p>
+            <a class="boton" href="{% url 'ejercicio' e.id %}">Ver ejercicio</a>
         </li>
     {% endfor %}
     </ul>

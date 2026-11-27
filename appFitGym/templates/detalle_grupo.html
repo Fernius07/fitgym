@@ -5,15 +5,20 @@
 {% block contenido %}
 <h2>{{ grupo.nombre }}</h2>
 <p>{{ grupo.descripcion }}</p>
+
 <h3>Ejercicios de este grupo</h3>
 {% if ejercicios %}
-    <ul>
+    <ul class="tarjetas">
     {% for e in ejercicios %}
-        <li><a href="{% url 'ejercicio' e.id %}">{{ e.nombre }}</a></li>
+        <li>
+            <h3>{{ e.nombre }}</h3>
+            <a class="boton" href="{% url 'ejercicio' e.id %}">Ver detalles</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No hay ejercicios asociados.</p>
 {% endif %}
-<p><a href="{% url 'grupos' %}">Volver a la lista de grupos musculares</a></p>
+
+<p><a class="boton boton-claro" href="{% url 'grupos' %}">Volver a los grupos musculares</a></p>
 {% endblock %}

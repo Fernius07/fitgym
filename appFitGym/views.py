@@ -14,7 +14,7 @@ def index(request):
 
 
 def lista_ejercicios(request):
-    ejercicios = Ejercicio.objects.order_by('nombre')
+    ejercicios = Ejercicio.objects.select_related('grupo').order_by('nombre')
     context = {'lista_ejercicios': ejercicios}
     return render(request, 'lista_ejercicios.html', context)
 
@@ -47,6 +47,6 @@ def lista_equipamientos(request):
 
 def detalle_equipamiento(request, equipamiento_id):
     equipamiento = get_object_or_404(Equipamiento, pk=equipamiento_id)
-    ejercicios = equipamiento.ejercicio_set.order_by('nombre')
+    ejercicios = equipamiento.ejercicio_set.select_related('grupo').order_by('nombre')
     context = {'equipamiento': equipamiento, 'ejercicios': ejercicios}
     return render(request, 'detalle_equipamiento.html', context)
