@@ -5,13 +5,9 @@
 {% block contenido %}
 <h2>Equipamiento</h2>
 {% if lista_equipamientos %}
-    <ul class="tarjetas">
+    <ul>
     {% for eq in lista_equipamientos %}
-        <li>
-            <h3>{{ eq.nombre }}</h3>
-            <p>{{ eq.descripcion|truncatewords:12 }}</p>
-            <a class="boton" href="{% url 'equipamiento' eq.id %}">Ver ejercicios</a>
-        </li>
+        <li><a href="{% url 'equipamiento' eq.id %}">{{ eq.nombre }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

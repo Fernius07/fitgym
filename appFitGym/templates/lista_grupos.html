@@ -5,13 +5,9 @@
 {% block contenido %}
 <h2>Grupos musculares</h2>
 {% if lista_grupos %}
-    <ul class="tarjetas">
+    <ul>
     {% for g in lista_grupos %}
-        <li>
-            <h3>{{ g.nombre }}</h3>
-            <p>{{ g.descripcion|truncatewords:12 }}</p>
-            <a class="boton" href="{% url 'grupo' g.id %}">Ver ejercicios</a>
-        </li>
+        <li><a href="{% url 'grupo' g.id %}">{{ g.nombre }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

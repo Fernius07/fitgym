@@ -3,21 +3,18 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #222222;
-    background-color: #eceff3;
+    background-color: #f4f4f4;
     margin: 0;
 }
 
-/* Cabecera y menú */
 header {
     background-color: #1b2a41;
     color: #ffffff;
     padding: 20px;
-    text-align: center;
 }
 
 header h1 {
-    margin: 0 0 15px 0;
-    letter-spacing: 1px;
+    margin: 0 0 10px 0;
 }
 
 nav ul {
@@ -28,147 +25,52 @@ nav ul {
 
 nav li {
     display: inline-block;
-    margin: 4px;
+    margin-right: 20px;
 }
 
 nav a {
-    display: block;
-    padding: 8px 16px;
     color: #ffffff;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 20px;
-    border: 1px solid #ffffff;
 }
 
 nav a:hover {
-    background-color: #e63946;
-    border-color: #e63946;
+    text-decoration: underline;
 }
 
-/* Contenido principal */
 main {
     width: 80%;
     max-width: 900px;
-    margin: 25px auto;
-    padding: 25px;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border: 1px solid #cccccc;
 }
 
 h2 {
     color: #1b2a41;
-    border-bottom: 3px solid #e63946;
+    border-bottom: 2px solid #e63946;
     padding-bottom: 5px;
-}
-
-h3 {
-    color: #1b2a41;
 }
 
 a {
     color: #e63946;
 }
 
-/* Botones */
-.boton {
-    display: inline-block;
-    padding: 8px 18px;
-    background-color: #e63946;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    border: 2px solid #e63946;
-}
-
-.boton:hover {
-    background-color: #c1121f;
-    border-color: #c1121f;
-}
-
-.boton-claro {
-    background-color: #ffffff;
-    color: #e63946;
-}
-
-.boton-claro:hover {
-    background-color: #e63946;
-    color: #ffffff;
-}
-
-/* Bloque de presentación de la portada */
-.presentacion {
-    background-color: #1b2a41;
-    color: #ffffff;
-    padding: 30px;
-    margin-bottom: 25px;
-    text-align: center;
-    border-radius: 8px;
-}
-
-.presentacion h2 {
-    color: #ffffff;
-    border-bottom: none;
-}
-
-/* Tarjetas */
 .tarjetas {
     list-style: none;
-    margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .tarjetas li {
-    flex: 1 1 220px;
-    max-width: 280px;
-    margin: 8px;
-    padding: 15px;
-    background-color: #f7f8fa;
-    border: 1px solid #d5d9e0;
-    border-top: 4px solid #e63946;
-    border-radius: 6px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
 .tarjetas h3 {
-    margin: 8px 0;
-}
-
-/* Etiquetas (grupo muscular y equipamiento) */
-.etiqueta {
-    display: inline-block;
-    padding: 2px 10px;
-    background-color: #1b2a41;
-    color: #ffffff;
-    font-size: 13px;
-    border-radius: 12px;
-}
-
-.etiquetas {
-    list-style: none;
-    margin: 0 0 15px 0;
-    padding: 0;
-}
-
-.etiquetas li {
-    display: inline-block;
-    margin: 0 6px 6px 0;
-}
-
-.etiquetas a {
-    display: inline-block;
-    padding: 4px 14px;
-    background-color: #1b2a41;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 14px;
-}
-
-.etiquetas a:hover {
-    background-color: #e63946;
+    margin: 0 0 5px 0;
 }
 
 footer {

@@ -14,7 +14,7 @@ def index(request):
 
 
 def lista_ejercicios(request):
-    ejercicios = Ejercicio.objects.select_related('grupo').order_by('nombre')
+    ejercicios = Ejercicio.objects.order_by('nombre')
     context = {'lista_ejercicios': ejercicios}
     return render(request, 'lista_ejercicios.html', context)
 

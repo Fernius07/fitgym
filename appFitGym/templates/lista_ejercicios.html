@@ -5,13 +5,9 @@
 {% block contenido %}
 <h2>Lista de ejercicios</h2>
 {% if lista_ejercicios %}
-    <ul class="tarjetas">
+    <ul>
     {% for e in lista_ejercicios %}
-        <li>
-            <span class="etiqueta">{{ e.grupo.nombre }}</span>
-            <h3>{{ e.nombre }}</h3>
-            <a class="boton" href="{% url 'ejercicio' e.id %}">Ver detalles</a>
-        </li>
+        <li><a href="{% url 'ejercicio' e.id %}">{{ e.nombre }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
