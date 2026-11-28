@@ -21,8 +21,29 @@ Proyecto del grupo IW-BI-09 para la asignatura de Ingeniería Web. Es una págin
 | **3. Formularios** | Nueva entidad `Valoracion` (autor, puntuación de 1 a 5, comentario y fecha) ligada a `Ejercicio`, con un `ModelForm` en la parte pública. | `appFitGym/models.py`, `appFitGym/forms.py`, `templates/detalle_ejercicio.html` |
 | **5. Datos iniciales** | El fixture `datos.json` incluye todas las entidades: 6 grupos, 6 equipamientos, 15 ejercicios y 6 valoraciones. | `appFitGym/fixtures/datos.json` |
 | **6. Multilingüismo (i18n)** | Español e inglés. Las URLs llevan el prefijo del idioma (`/es/...`, `/en/...`) con `i18n_patterns`, `LocaleMiddleware` detecta el idioma y las partes estáticas de las plantillas y el formulario están traducidas. | `fitgym/settings.py`, `fitgym/urls.py`, `locale/en/LC_MESSAGES/django.po` |
+| **7. Rendimiento y seguridad** | Lectura de `SECRET_KEY`, `DEBUG` y `ALLOWED_HOSTS` desde variables de entorno (con valores por defecto para desarrollo), ajustes seguros cuando `DEBUG=False`, eliminación de `MAILERS` y reducción de 7 a 1 consulta en la portada. | `fitgym/settings.py`, `appFitGym/views.py` |
 
-También hay tests automáticos (`py manage.py test`) que comprueban las páginas en los dos idiomas, la traducción, el envío de valoraciones (con y sin AJAX) y los datos iniciales.
+También hay 11 tests automáticos (`py manage.py test`) que comprueban las páginas en los dos idiomas, la traducción, la redirección de raíz, los 404, el número de consultas en portada, el envío de valoraciones (con y sin AJAX) y los datos iniciales.
+
+## Estructura del proyecto
+
+```text
+manage.py
+db.sqlite3
+README.md
+repositorio.txt
+fitgym/
+    settings.py, urls.py, wsgi.py, asgi.py, __init__.py
+locale/en/LC_MESSAGES/
+    django.po, django.mo
+appFitGym/
+    models.py, forms.py, views.py, urls.py, admin.py, apps.py, tests.py
+    migrations/
+    fixtures/datos.json
+    static/css/estilos.css
+    static/js/fitgym.js
+    templates/
+```
 
 ## Entrega E4b: AgendaVue
 
@@ -37,19 +58,11 @@ Los detalles están en el `README.md` de la carpeta `E4b`.
 
 ## Pasos para probar el proyecto
 
-1. Abrir un cmd y activar el entorno virtual: `workon [nombre entorno virtual]`. Si no sabéis el nombre, escribid `workon` y os sale la lista.
+1. Abrir un cmd y activar el entorno virtual: `workon [nombre entorno virtual]` (si no sabéis el nombre, escribid `workon` y os sale la lista).
 2. Ir a la carpeta del proyecto (la que contiene `manage.py`).
-3. La base de datos `db.sqlite3` ya viene con los datos. Para crearla desde cero:
-   ```
-   py manage.py migrate
-   py manage.py loaddata datos
-   ```
-4. Ejecutar el servidor: `py manage.py runserver`
-5. Abrir el navegador en http://127.0.0.1:8000/ (redirige a `/es/`; la versión en inglés está en http://127.0.0.1:8000/en/).
-6. Para el panel de admin: http://127.0.0.1:8000/admin
+3. La base de datos `db.sqlite3` ya viene con los datos (para crearla desde cero: `py manage.py migrate` y `py manage.py loaddata datos`).
+4. Ejecutar el servidor: `py manage.py runserver`.
+5. Abrir el navegador en `http://127.0.0.1:8000/`.
+6. Panel de admin: `http://127.0.0.1:8000/admin`, usuario `adminDjango`, contraseña `adminDjango`.
 
-   Usuario: adminDjango
-
-   Contraseña: adminDjango
-
-Las traducciones ya están compiladas (`django.mo`). Si se cambia el `.po`, hay que volver a compilarlas con `py manage.py compilemessages` (necesita GNU gettext).
+La versión en inglés está disponible en `http://127.0.0.1:8000/en/` (la raíz redirige a `/es/` y `/admin` redirige al idioma activo). Las traducciones ya están compiladas (`django.mo`); si se modifica `django.po`, hay que recompilar con `py manage.py compilemessages` (requiere GNU gettext).
