@@ -12,7 +12,7 @@
     <ul class="tarjetas">
     {% for e in ejercicios %}
         <li>
-            <h3>{{ e.nombre }}</h3>
+            <h4>{{ e.nombre }}</h4>
             <a class="boton" href="{% url 'ejercicio' e.id %}">{% translate "Ver detalles" %}</a>
         </li>
     {% endfor %}

@@ -1,12 +1,4 @@
-/* FitGym & Workout - interacción en el cliente (E4a, opción 1)
- *
- * 1. Selector de idioma: cambia de idioma al elegir una opción.
- * 2. Lista de ejercicios: filtro en vivo por nombre y por grupo muscular.
- * 3. Detalle de ejercicio: envío de valoraciones por AJAX (fetch) sin
- *    recargar la página. Si no hay JavaScript, el formulario funciona
- *    igualmente con un POST normal.
- * 4. Mensajes de Django: desaparecen solos con un efecto de fundido.
- */
+// Interacción en el cliente para FitGym & Workout
 document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -17,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function iniciarSelectorIdioma() {
-    var selector = document.getElementById('selector-idioma');
+    const selector = document.getElementById('selector-idioma');
     if (!selector) { return; }
     selector.addEventListener('change', function () {
         selector.form.submit();
@@ -25,27 +17,27 @@ function iniciarSelectorIdioma() {
 }
 
 function iniciarFiltroEjercicios() {
-    var lista = document.getElementById('lista-ejercicios');
-    var buscador = document.getElementById('buscador');
-    if (!lista || !buscador) { return; }
+    const lista = document.getElementById('lista-ejercicios');
+    const buscador = document.getElementById('buscador');
+    const contador = document.getElementById('contador');
+    const sinResultados = document.getElementById('sin-resultados');
+    if (!lista || !buscador || !contador || !sinResultados) { return; }
 
-    var tarjetas = Array.prototype.slice.call(lista.children);
-    var botones = document.querySelectorAll('#filtros .filtro');
-    var contador = document.getElementById('contador');
-    var sinResultados = document.getElementById('sin-resultados');
-    var grupoActivo = '';
+    const tarjetas = Array.from(lista.children);
+    const botones = document.querySelectorAll('#filtros .filtro');
+    let grupoActivo = '';
 
     function quitarTildes(texto) {
-        return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+        return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     }
 
     function filtrar() {
-        var texto = quitarTildes(buscador.value.trim());
-        var visibles = 0;
+        const texto = quitarTildes(buscador.value.trim());
+        let visibles = 0;
         tarjetas.forEach(function (tarjeta) {
-            var coincideTexto = quitarTildes(tarjeta.dataset.nombre).indexOf(texto) !== -1;
-            var coincideGrupo = !grupoActivo || tarjeta.dataset.grupo === grupoActivo;
-            var mostrar = coincideTexto && coincideGrupo;
+            const coincideTexto = quitarTildes(tarjeta.dataset.nombre).indexOf(texto) !== -1;
+            const coincideGrupo = !grupoActivo || tarjeta.dataset.grupo === grupoActivo;
+            const mostrar = coincideTexto && coincideGrupo;
             tarjeta.hidden = !mostrar;
             if (mostrar) { visibles++; }
         });
@@ -56,10 +48,14 @@ function iniciarFiltroEjercicios() {
     }
 
     buscador.addEventListener('input', filtrar);
-    Array.prototype.forEach.call(botones, function (boton) {
+    botones.forEach(function (boton) {
         boton.addEventListener('click', function () {
-            Array.prototype.forEach.call(botones, function (b) { b.classList.remove('activo'); });
+            botones.forEach(function (b) {
+                b.classList.remove('activo');
+                b.setAttribute('aria-pressed', 'false');
+            });
             boton.classList.add('activo');
+            boton.setAttribute('aria-pressed', 'true');
             grupoActivo = boton.dataset.grupo;
             filtrar();
         });
@@ -68,27 +64,28 @@ function iniciarFiltroEjercicios() {
 }
 
 function iniciarValoracionesAjax() {
-    var form = document.getElementById('form-valoracion');
+    const form = document.getElementById('form-valoracion');
     if (!form || !window.fetch) { return; }
 
-    var lista = document.getElementById('lista-valoraciones');
-    var total = document.getElementById('total-valoraciones');
-    var vacio = document.getElementById('sin-valoraciones');
-    var aviso = document.getElementById('aviso-valoracion');
-    var boton = form.querySelector('button[type="submit"]');
+    const lista = document.getElementById('lista-valoraciones');
+    const total = document.getElementById('total-valoraciones');
+    const vacio = document.getElementById('sin-valoraciones');
+    const aviso = document.getElementById('aviso-valoracion');
+    const boton = form.querySelector('button[type="submit"]');
+    if (!lista || !total || !vacio || !aviso || !boton) { return; }
 
     function limpiarErrores() {
-        Array.prototype.forEach.call(form.querySelectorAll('.errores'), function (ul) {
+        form.querySelectorAll('.errores').forEach(function (ul) {
             ul.innerHTML = '';
         });
     }
 
     function mostrarErrores(errores) {
         Object.keys(errores).forEach(function (campo) {
-            var ul = form.querySelector('.errores[data-campo="' + campo + '"]');
+            const ul = form.querySelector('.errores[data-campo="' + campo + '"]');
             if (!ul) { return; }
             errores[campo].forEach(function (mensaje) {
-                var li = document.createElement('li');
+                const li = document.createElement('li');
                 li.textContent = mensaje;
                 ul.appendChild(li);
             });
@@ -108,12 +105,17 @@ function iniciarValoracionesAjax() {
             headers: { 'X-Requested-With': 'XMLHttpRequest' },
             credentials: 'same-origin'
         })
-            .then(function (respuesta) { return respuesta.json(); })
+            .then(function (respuesta) {
+                if (!respuesta.ok && respuesta.status !== 400) {
+                    throw new Error('Error ' + respuesta.status);
+                }
+                return respuesta.json();
+            })
             .then(function (datos) {
                 if (datos.ok) {
                     lista.insertAdjacentHTML('afterbegin', datos.html);
-                    var nueva = lista.firstElementChild;
-                    nueva.classList.add('nueva');          // efecto de aparición
+                    const nueva = lista.firstElementChild;
+                    nueva.classList.add('nueva');
                     total.textContent = datos.total;
                     vacio.hidden = true;
                     form.reset();
@@ -134,7 +136,7 @@ function iniciarValoracionesAjax() {
 }
 
 function ocultarMensajes() {
-    var mensajes = document.querySelector('.mensajes');
+    const mensajes = document.querySelector('.mensajes');
     if (!mensajes) { return; }
     setTimeout(function () {
         mensajes.classList.add('desvanecer');

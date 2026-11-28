@@ -6,17 +6,17 @@
 {% block contenido %}
 <h2>{% translate "Lista de ejercicios" %}</h2>
 {% if lista_ejercicios %}
-    {# Filtro en el cliente con JavaScript (oculto si el navegador no tiene JS) #}
+    {# Filtro en vivo con JavaScript #}
     <div class="filtros js-visible" id="filtros">
         <label for="buscador">{% translate "Buscar ejercicio" %}</label>
         <input type="search" id="buscador" placeholder="{% translate 'Escribe un nombre...' %}">
         <div class="filtro-grupos">
-            <button type="button" class="filtro activo" data-grupo="">{% translate "Todos" %}</button>
+            <button type="button" class="filtro activo" data-grupo="" aria-pressed="true">{% translate "Todos" %}</button>
             {% for g in grupos %}
-                <button type="button" class="filtro" data-grupo="{{ g.id }}">{{ g.nombre }}</button>
+                <button type="button" class="filtro" data-grupo="{{ g.id }}" aria-pressed="false">{{ g.nombre }}</button>
             {% endfor %}
         </div>
-        <p class="contador" id="contador" data-plantilla="{% translate 'Mostrando {n} de {total} ejercicios' %}"></p>
+        <p class="contador" id="contador" aria-live="polite" data-plantilla="{% translate 'Mostrando {n} de {total} ejercicios' %}"></p>
     </div>
     <ul class="tarjetas" id="lista-ejercicios">
     {% for e in lista_ejercicios %}

@@ -1,5 +1,5 @@
 {% load i18n %}<li class="valoracion">
-    <span class="estrellas" title="{{ v.puntuacion }}/5">{% for i in "12345" %}{% if forloop.counter <= v.puntuacion %}★{% else %}☆{% endif %}{% endfor %}</span>
+    <span class="estrellas" role="img" title="{{ v.puntuacion }}/5" aria-label="{{ v.puntuacion }}/5">{% for i in "12345" %}{% if forloop.counter <= v.puntuacion %}★{% else %}☆{% endif %}{% endfor %}</span>
     <strong>{{ v.autor }}</strong>
     <span class="fecha">{{ v.fecha|date:"SHORT_DATE_FORMAT" }}</span>
     <p>{{ v.comentario }}</p>
