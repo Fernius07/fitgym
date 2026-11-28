@@ -1,6 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
+{% load static i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,18 +11,39 @@
         <h1>FitGym &amp; Workout</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'index' %}">Portada</a></li>
-                <li><a href="{% url 'ejercicios' %}">Ejercicios</a></li>
-                <li><a href="{% url 'grupos' %}">Grupos musculares</a></li>
-                <li><a href="{% url 'equipamientos' %}">Equipamiento</a></li>
+                <li><a href="{% url 'index' %}">{% translate "Portada" %}</a></li>
+                <li><a href="{% url 'ejercicios' %}">{% translate "Ejercicios" %}</a></li>
+                <li><a href="{% url 'grupos' %}">{% translate "Grupos musculares" %}</a></li>
+                <li><a href="{% url 'equipamientos' %}">{% translate "Equipamiento" %}</a></li>
             </ul>
         </nav>
+        <form class="idioma" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <label for="selector-idioma">{% translate "Idioma" %}</label>
+            <select name="language" id="selector-idioma">
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as idiomas %}
+                {% for idioma in idiomas %}
+                    <option value="{{ idioma.code }}"{% if idioma.code == LANGUAGE_CODE %} selected{% endif %}>{{ idioma.name_local|capfirst }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="js-oculto">{% translate "Cambiar" %}</button>
+        </form>
     </header>
     <main>
+        {% if messages %}
+            <ul class="mensajes">
+            {% for m in messages %}
+                <li class="mensaje">{{ m }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
         {% block contenido %}{% endblock %}
     </main>
     <footer>
-        <p>FitGym &amp; Workout - Ingeniería Web</p>
+        <p>FitGym &amp; Workout - {% translate "Ingeniería Web" %}</p>
     </footer>
+    <script src="{% static 'js/fitgym.js' %}"></script>
 </body>
 </html>

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block titulo %}Portada - FitGym &amp; Workout{% endblock %}
+{% block titulo %}{% translate "Portada" %} - FitGym &amp; Workout{% endblock %}
 
 {% block contenido %}
 <section class="presentacion">
-    <h2>Entrena con cabeza</h2>
-    <p>Consulta ejercicios de fuerza y acondicionamiento, clasificados por grupo muscular y por el material que necesitas.</p>
-    <a class="boton" href="{% url 'ejercicios' %}">Ver ejercicios</a>
-    <a class="boton boton-claro" href="{% url 'grupos' %}">Ver grupos musculares</a>
+    <h2>{% translate "Entrena con cabeza" %}</h2>
+    <p>{% translate "Consulta ejercicios de fuerza y acondicionamiento, clasificados por grupo muscular y por el material que necesitas." %}</p>
+    <a class="boton" href="{% url 'ejercicios' %}">{% translate "Ver ejercicios" %}</a>
+    <a class="boton boton-claro" href="{% url 'grupos' %}">{% translate "Ver grupos musculares" %}</a>
 </section>
 
-<h2>Ejercicios destacados</h2>
+<h2>{% translate "Ejercicios destacados" %}</h2>
 {% if destacados %}
     <ul class="tarjetas">
     {% for e in destacados %}
@@ -18,11 +19,11 @@
             <a class="etiqueta" href="{% url 'grupo' e.grupo.id %}">{{ e.grupo.nombre }}</a>
             <h3>{{ e.nombre }}</h3>
             <p>{{ e.descripcion|truncatewords:12 }}</p>
-            <a class="boton" href="{% url 'ejercicio' e.id %}">Ver ejercicio</a>
+            <a class="boton" href="{% url 'ejercicio' e.id %}">{% translate "Ver ejercicio" %}</a>
         </li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No hay ejercicios creados.</p>
+    <p>{% translate "No hay ejercicios creados." %}</p>
 {% endif %}
 {% endblock %}

@@ -1,20 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block titulo %}Equipamiento - FitGym &amp; Workout{% endblock %}
+{% block titulo %}{% translate "Equipamiento" %} - FitGym &amp; Workout{% endblock %}
 
 {% block contenido %}
-<h2>Equipamiento</h2>
+<h2>{% translate "Equipamiento" %}</h2>
 {% if lista_equipamientos %}
     <ul class="tarjetas">
     {% for eq in lista_equipamientos %}
         <li>
             <h3>{{ eq.nombre }}</h3>
             <p>{{ eq.descripcion|truncatewords:12 }}</p>
-            <a class="boton" href="{% url 'equipamiento' eq.id %}">Ver ejercicios</a>
+            <a class="boton" href="{% url 'equipamiento' eq.id %}">{% translate "Ver ejercicios" %}</a>
         </li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No hay equipamiento creado.</p>
+    <p>{% translate "No hay equipamiento creado." %}</p>
 {% endif %}
 {% endblock %}
