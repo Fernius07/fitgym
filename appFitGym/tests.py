@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import translation
 
-from .models import Ejercicio, Valoracion
+from .models import Ejercicio, GrupoMuscular, Valoracion
 
 
 class FitGymTests(TestCase):
@@ -67,3 +67,31 @@ class FitGymTests(TestCase):
     def test_datos_iniciales_todas_las_entidades(self):
         self.assertEqual(Ejercicio.objects.count(), 15)
         self.assertTrue(Valoracion.objects.exists())
+
+    def test_raiz_redirige_a_espanol(self):
+        respuesta = self.client.get('/')
+        self.assertRedirects(respuesta, '/es/')
+
+    def test_paginas_inexistentes_devuelven_404(self):
+        for url in ('/es/ejercicios/999/', '/es/grupos/999/', '/es/equipamientos/999/'):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url).status_code, 404)
+
+    def test_portada_muestra_mas_popular_por_grupo(self):
+        respuesta = self.client.get('/es/')
+        destacados = respuesta.context['destacados']
+        self.assertEqual(len(destacados), GrupoMuscular.objects.count())
+        for ejercicio in destacados:
+            max_pop = (Ejercicio.objects.filter(grupo=ejercicio.grupo)
+                       .order_by('-popularidad').first())
+            self.assertEqual(ejercicio, max_pop)
+
+    def test_traduccion_detalle_ingles(self):
+        respuesta = self.client.get('/en/ejercicios/1/')
+        self.assertContains(respuesta, 'Muscle group')
+        self.assertContains(respuesta, 'Required equipment')
+
+    def test_consultas_portada(self):
+        with self.assertNumQueries(1):
+            respuesta = self.client.get('/es/')
+        self.assertEqual(respuesta.status_code, 200)
