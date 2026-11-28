@@ -5,8 +5,6 @@ from .models import Valoracion
 
 
 class ValoracionForm(forms.ModelForm):
-    """Formulario público basado en el modelo Valoracion."""
-
     class Meta:
         model = Valoracion
         fields = ['autor', 'puntuacion', 'comentario']

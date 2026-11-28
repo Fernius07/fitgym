@@ -21,9 +21,13 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         destacados = []
-        for grupo in GrupoMuscular.objects.order_by('nombre'):
-            ejercicio = grupo.ejercicio_set.order_by('-popularidad').first()
-            if ejercicio:
+        grupos_vistos = set()
+        ejercicios = Ejercicio.objects.select_related('grupo').order_by(
+            'grupo__nombre', '-popularidad', 'nombre'
+        )
+        for ejercicio in ejercicios:
+            if ejercicio.grupo_id not in grupos_vistos:
+                grupos_vistos.add(ejercicio.grupo_id)
                 destacados.append(ejercicio)
         context['destacados'] = destacados
         return context
@@ -41,12 +45,8 @@ class EjercicioListView(ListView):
         return context
 
 
+# Detalle de un ejercicio con formulario de valoraciones (normal o AJAX)
 class EjercicioDetailView(FormMixin, DetailView):
-    """Detalle de un ejercicio con el formulario de valoraciones.
-
-    GET muestra el ejercicio; POST guarda una valoración. Si la petición
-    llega por AJAX se responde con JSON en lugar de redirigir.
-    """
     model = Ejercicio
     template_name = 'detalle_ejercicio.html'
     context_object_name = 'ejercicio'
@@ -57,7 +57,7 @@ class EjercicioDetailView(FormMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['equipamientos'] = self.object.equipamiento.all()
+        context['equipamientos'] = self.object.equipamiento.order_by('nombre')
         context['valoraciones'] = self.object.valoraciones.order_by('-fecha')
         return context
 
